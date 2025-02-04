@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug</title>
+</head>
+<body>
+  <div id="myDiv">
+    This text is visible.
+  </div>
+  <script>
+    // This script attempts to modify the content of the div 
+    // but fails due to an asynchronous operation.
+    setTimeout(function() {
+      document.getElementById("myDiv").innerHTML = "This text should replace the previous text.";
+      console.log(document.getElementById("myDiv").innerHTML);
+    }, 0);
+  </script>
+</body>
+</html>
