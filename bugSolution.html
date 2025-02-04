@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug Solution</title>
+</head>
+<body>
+  <div id="myDiv">
+    This text is visible.
+  </div>
+  <script>
+    //Corrected version using the MutationObserver
+    const targetNode = document.getElementById('myDiv');
+    const config = { childList: true, subtree: true };
+    const callback = function(mutationsList, observer) {
+      for(const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          console.log('A child node has been added or removed.');
+        }
+      }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+    setTimeout(function(){
+      document.getElementById("myDiv").innerHTML = "This text should replace the previous text.";
+    },0);
+  </script>
+</body>
+</html>
